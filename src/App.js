@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 import Home from './components/pages/Home';
+import NotFound from './components/pages/NotFound';
 
 function App() {
   return (
@@ -10,9 +11,12 @@ function App() {
       {/* Navbar goes here */}
       <div className="container">
         <div className="card todo_area">
-          <Switch>
-            <Route exact path="/" component={Home} />
-          </Switch>
+          <div className="todo_content">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
         </div>
       </div>
     </Router>
