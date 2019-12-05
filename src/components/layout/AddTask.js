@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AlertContext from '../../context/alert/alertContext';
 
 const AddTask = () => {
+  const alertContext = useContext(AlertContext);
+
   const [todo, setTodo] = useState('');
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(todo);
-    setTodo('');
+    if (todo === '') {
+      alertContext.setAlert('Please enter a todo', 'dark');
+    } else {
+      console.log(todo);
+      setTodo('');
+    }
   };
 
   const onChange = e => {
