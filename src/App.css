@@ -21,7 +21,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
-  color: #333;
+  color: #d4d5dc;
 }
 
 a {
@@ -419,7 +419,13 @@ table th {
   background-color: var(--sweet-dark);
 }
 
+.todo_content {
+  width: 85%;
+  margin: auto;
+}
+
 /* tODO INPUT FOR  ADDING TODO*/
 .todo_input {
-  border-radius: 10px;
+  border-radius: 5px;
 }
+
