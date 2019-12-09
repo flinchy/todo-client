@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
-const Todo = () => {
+const Todo = ({ todo }) => {
+  const [toggleAction, setToggleAction] = useState(false);
   const onClick = () => {
-    console.log('you clicked me');
-    
+    setToggleAction(prev => !prev);
   };
 
   return (
@@ -11,19 +11,26 @@ const Todo = () => {
       <div>
         <div className="todo_items-area">
           <div>
-            <input type="checkbox" />{' '}
-            <span>Getting an invite from decagon</span>
+            <input type="checkbox" id="todo"/>
+            {" "}<label htmlFor="todo">{todo.description}</label> 
           </div>
           <i className="fas fa-ellipsis-h" onClick={onClick}></i>
         </div>
-        <div className="cta-task">
-          <span>
-            <button className="btn btn-secondary btn-sm">Edit</button>
-          </span>{' '}
-          <span>
-            <button className="btn btn-primary btn-sm">Delete</button>
-          </span>
-        </div>
+
+        {toggleAction && (
+          <div className="cta-task">
+            <span>
+              <button className="btn btn-secondary btn-xm" title="edit">
+                Edit
+              </button>
+            </span>{' '}
+            <span>
+              <button className="btn btn-primary btn-xm" title="delete">
+                Delete
+              </button>
+            </span>
+          </div>
+        )}
       </div>
     </Fragment>
   );
