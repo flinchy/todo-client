@@ -1,4 +1,4 @@
-import { GET_TODOS } from '../Types';
+import { GET_TODOS, CREATE_TODO } from '../Types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -6,6 +6,12 @@ export default (state, action) => {
       return {
         ...state,
         todos: action.payload,
+      };
+
+    case CREATE_TODO:
+      return {
+        ...state,
+        todos: [...state.todos, action.payload]
       };
 
     default:
