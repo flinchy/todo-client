@@ -1,41 +1,73 @@
 import React, { useState, useContext } from 'react';
+import TodoContext from '../../context/todo/todoContext';
 import AlertContext from '../../context/alert/alertContext';
 
 const AddTask = () => {
+  const todoContext = useContext(TodoContext);
   const alertContext = useContext(AlertContext);
 
-  const [todo, setTodo] = useState('');
+  const [todo, setTodo] = useState({
+    title: '',
+    description: '',
+    status: '',
+  });
+  const {title, description, status} = todo;
+
 
   const onSubmit = e => {
     e.preventDefault();
-    if (todo === '') {
-      alertContext.setAlert('Please enter a todo', 'dark');
+    if (title === '' || description === '' || status === '') {
+      alertContext.setAlert('Please fill in all fields', 'dark');
     } else {
-      console.log(todo);
-      setTodo('');
+      todoContext.createTodo(todo);
+      setTodo({
+        title: '',
+        description: '',
+        status: ''
+      })
     }
   };
 
   const onChange = e => {
-    setTodo(e.target.value);
+    e.preventDefault()
+    setTodo({...todo,[e.target.name]: e.target.value});
   };
 
   return (
     <div>
       <form className="form" onSubmit={onSubmit}>
+      <input
+          type="text"
+          name="title"
+          value={todo.title}
+          placeholder="Add Todo Title.."
+          className="bg-dark todo_input"
+          onChange={onChange}
+        />
+
         <input
           type="text"
-          name="todo"
-          value={todo}
-          placeholder="Add a Task.."
+          name="description"
+          value={todo.description}
+          placeholder="Add Todo Description.."
+          className="bg-dark todo_input"
+          onChange={onChange}
+        />
+         <input
+          type="text"
+          name="status"
+          value={todo.status}
+          placeholder="status.."
           className="bg-dark todo_input"
           onChange={onChange}
         />
         <input
           type="submit"
-          value="addTodo"
-          className="btn btn-light btn-dark"
+          value="AddTodo"
+          className="btn btn-light btn-dark btn-xm"
         />
+        <span>
+        </span>
       </form>
     </div>
   );
