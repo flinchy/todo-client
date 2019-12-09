@@ -2,7 +2,8 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import TodoContext from './todoContext';
 import TodoReducer from './todoReducer';
-import { GET_TODOS } from '../Types';
+import SupportHeader from '../../SupportHeader';
+import { GET_TODOS, CREATE_TODO } from '../Types';
 
 const TodoState = props => {
   const initialState = {
@@ -17,32 +18,47 @@ const TodoState = props => {
     //set loading here
 
     try {
-
       const res = await axios.get(`http://localhost:8080/api/v1/tasks`);
-
-      console.log(res);
 
       dispatch({
         type: GET_TODOS,
-        payload: res.data,
+        payload: res.data.data,
       });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  //*Create Todo
+  const createTodo = async payload => {
+    //set Loading
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/api/v1/tasks`,
+        payload,
+        SupportHeader({ 'Content-Type': 'application/json' }),
+      );
+
+      dispatch({
+        type: CREATE_TODO,
+        payload: res.data.data,
+      });
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-      <TodoContext.Provider
+    <TodoContext.Provider
       value={{
-          todos: state.todos,
-          getAllTodos,
-      }}>
-          {props.children}
-      </TodoContext.Provider>
-  )
-
+        todos: state.todos,
+        getAllTodos,
+        createTodo,
+      }}
+    >
+      {props.children}
+    </TodoContext.Provider>
+  );
 };
-
 
 export default TodoState;
