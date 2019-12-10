@@ -3,11 +3,18 @@ import axios from 'axios';
 import TodoContext from './todoContext';
 import TodoReducer from './todoReducer';
 import SupportHeader from '../../SupportHeader';
-import { GET_TODOS, CREATE_TODO } from '../Types';
+import {
+  GET_TODOS,
+  CREATE_TODO,
+  UPDATE_TODO,
+  SET_CURRENT,
+  CLEAR_CURRENT,
+} from '../Types';
 
 const TodoState = props => {
   const initialState = {
     todos: [],
+    current: null,
     loading: false,
   };
 
@@ -25,7 +32,7 @@ const TodoState = props => {
         payload: res.data.data,
       });
     } catch (error) {
-      console.error(error);
+      console.error({ error: error });
     }
   };
 
@@ -44,16 +51,50 @@ const TodoState = props => {
         payload: res.data.data,
       });
     } catch (error) {
-      console.error(error);
+      console.error({ error: { error } });
     }
   };
+
+  //*Update Todo
+  const updateTodo = async (id, payload) => {
+    //set loading
+    try {
+      const res = await axios.put(
+        `http://localhost:8080/api/v1/tasks/${id}`,
+        payload,
+        SupportHeader({ 'Content-Type': 'application/json' }),
+      );
+
+      dispatch({
+        type: UPDATE_TODO,
+        payload: res.data.data,
+      });
+
+    } catch (error) {
+      console.error({ error });
+    }
+  };
+
+  //*Set Current Todo
+  const setCurrent = todo => {
+    dispatch({type: SET_CURRENT, payload: todo})
+  }
+
+  //*Clear Current Todo
+  const clearCurrent = () => {
+    dispatch({type: CLEAR_CURRENT})
+  }
 
   return (
     <TodoContext.Provider
       value={{
         todos: state.todos,
+        current: state.current,
         getAllTodos,
         createTodo,
+        updateTodo,
+        setCurrent,
+        clearCurrent
       }}
     >
       {props.children}
