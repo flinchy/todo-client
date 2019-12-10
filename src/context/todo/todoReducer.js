@@ -5,6 +5,7 @@ import {
   DELETE_TODO,
   SET_CURRENT,
   CLEAR_CURRENT,
+  SET_LOADING,
   // SET_CHECK,
 } from '../Types';
 
@@ -14,12 +15,14 @@ export default (state, action) => {
       return {
         ...state,
         todos: action.payload,
+        loading: false,
       };
 
     case CREATE_TODO:
       return {
         ...state,
         todos: [...state.todos, action.payload],
+        loading: false,
       };
 
     case UPDATE_TODO:
@@ -28,12 +31,14 @@ export default (state, action) => {
         todos: state.todos.map(todo =>
           todo.id === action.payload.id ? action.payload : todo,
         ),
+        loading: false,
       };
 
     case DELETE_TODO:
       return {
         ...state,
         todos: state.todos.filter(todo => todo.id !== action.payload),
+        loading: false,
       };
 
     case SET_CURRENT:
@@ -46,6 +51,11 @@ export default (state, action) => {
       return {
         ...state,
         current: null,
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     // case SET_CHECK:
     //   return {
