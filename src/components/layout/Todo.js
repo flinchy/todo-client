@@ -23,7 +23,7 @@ const Todo = ({ todo }) => {
 
     return (
       <Fragment>
-        {loading && Spinner}
+        {loading && <Spinner />}
         <div>
           <div className="todo_items-area">
             <div>
