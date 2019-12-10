@@ -91,12 +91,12 @@ const TodoState = props => {
     setLoading();
 
     try {
-      const res = await axios.delete(
+       await axios.delete(
         `https://todo-chisom.herokuapp.com/api/v1/tasks/${id}`,
         id,
         SupportHeader({ 'Content-Type': 'application/json' }),
       );
-      console.log(res);
+
       dispatch({
         type: DELETE_TODO,
         payload: id,
