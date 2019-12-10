@@ -10,6 +10,7 @@ import {
   DELETE_TODO,
   SET_CURRENT,
   CLEAR_CURRENT,
+  SET_LOADING,
   // SET_CHECK
 } from '../Types';
 
@@ -26,9 +27,12 @@ const TodoState = props => {
   //*Get Todos
   const getAllTodos = async () => {
     //set loading here
+    setLoading();
 
     try {
-      const res = await axios.get(`https://todo-chisom.herokuapp.com/api/v1/tasks`);
+      const res = await axios.get(
+        `https://todo-chisom.herokuapp.com/api/v1/tasks`,
+      );
 
       dispatch({
         type: GET_TODOS,
@@ -42,6 +46,8 @@ const TodoState = props => {
   //*Create Todo
   const createTodo = async payload => {
     //set Loading
+    setLoading();
+
     try {
       const res = await axios.post(
         `https://todo-chisom.herokuapp.com/api/v1/tasks`,
@@ -61,6 +67,8 @@ const TodoState = props => {
   //*Update Todo
   const updateTodo = async (id, payload) => {
     //set loading
+    setLoading();
+
     try {
       const res = await axios.put(
         `https://todo-chisom.herokuapp.com/api/v1/tasks/${id}`,
@@ -79,6 +87,9 @@ const TodoState = props => {
 
   //*Delete Todo
   const deleteTodo = async id => {
+    //set loading
+    setLoading();
+
     try {
       const res = await axios.delete(
         `https://todo-chisom.herokuapp.com/api/v1/tasks/${id}`,
@@ -105,7 +116,10 @@ const TodoState = props => {
     dispatch({ type: CLEAR_CURRENT });
   };
 
- // Set CheckBox
+  //*set loading
+  const setLoading = () => dispatch({ type: SET_LOADING });
+
+  // Set CheckBox
   // const setCheck = () => {
   //   dispatch({ type: SET_CHECK });
   // };
@@ -115,6 +129,7 @@ const TodoState = props => {
       value={{
         todos: state.todos,
         current: state.current,
+        loading: state.loading,
         // check: state.check,
         getAllTodos,
         createTodo,
