@@ -1,7 +1,14 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
+import TodoContext from '../../context/todo/todoContext';
+import PropTypes from 'prop-types';
+// import menuIcon from '../icons/icon-menu.png';
 
 const Todo = ({ todo }) => {
   const [toggleAction, setToggleAction] = useState(false);
+  const todoContext = useContext(TodoContext);
+
+  const {setCurrent} = todoContext
+
   const onClick = () => {
     setToggleAction(prev => !prev);
   };
@@ -11,8 +18,8 @@ const Todo = ({ todo }) => {
       <div>
         <div className="todo_items-area">
           <div>
-            <input type="checkbox" id="todo"/>
-            {" "}<label htmlFor="todo">{todo.description}</label> 
+            <input type="checkbox" id={todo.id}/>
+            {" "}<label htmlFor={todo.id} style={{fontSize: '13px'}}>{todo.description}</label>
           </div>
           <i className="fas fa-ellipsis-h" onClick={onClick}></i>
         </div>
@@ -20,7 +27,7 @@ const Todo = ({ todo }) => {
         {toggleAction && (
           <div className="cta-task">
             <span>
-              <button className="btn btn-secondary btn-xm" title="edit">
+              <button className="btn btn-secondary btn-xm" title="edit" onClick={() => setCurrent(todo)}>
                 Edit
               </button>
             </span>{' '}
@@ -35,5 +42,9 @@ const Todo = ({ todo }) => {
     </Fragment>
   );
 };
+
+Todo.propTypes = {
+  todo: PropTypes.object.isRequired,
+}
 
 export default Todo;
