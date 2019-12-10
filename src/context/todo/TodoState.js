@@ -10,12 +10,14 @@ import {
   DELETE_TODO,
   SET_CURRENT,
   CLEAR_CURRENT,
+  // SET_CHECK
 } from '../Types';
 
 const TodoState = props => {
   const initialState = {
     todos: [],
     current: null,
+    // check: false,
     loading: false,
   };
 
@@ -103,17 +105,24 @@ const TodoState = props => {
     dispatch({ type: CLEAR_CURRENT });
   };
 
+ // Set CheckBox
+  // const setCheck = () => {
+  //   dispatch({ type: SET_CHECK });
+  // };
+
   return (
     <TodoContext.Provider
       value={{
         todos: state.todos,
         current: state.current,
+        // check: state.check,
         getAllTodos,
         createTodo,
         updateTodo,
         deleteTodo,
         setCurrent,
         clearCurrent,
+        // setCheck
       }}
     >
       {props.children}

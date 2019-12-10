@@ -19,17 +19,23 @@ const Todo = ({ todo }) => {
     setToggleAction(prev => !prev);
   };
 
+  const handleCheck = () => {
+
+  }
 
   return (
     <Fragment>
       <div>
         <div className="todo_items-area">
           <div>
-            <input type="checkbox" id={todo.id} />{' '}
+            <input type="checkbox" id={todo.id} onClick={handleCheck}/>{' '}
             <label htmlFor={todo.id} style={{ fontSize: '13px' }}>
               {todo.description}
             </label>
-  <div className="todo-title">{`${todo.title[0].toUpperCase()}${todo.title.substr(1)}`} <span>{convertDate(todo.createdAt)}</span></div>
+            <div className="todo-title">
+              {`${todo.title[0].toUpperCase()}${todo.title.substr(1)}`}{' '}
+              <span className="time">{`created on ${convertDate(todo.createdAt)}`}</span>
+            </div>
           </div>
           <i className="fas fa-ellipsis-h" onClick={onClick}></i>
         </div>

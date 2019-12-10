@@ -5,6 +5,7 @@ import {
   DELETE_TODO,
   SET_CURRENT,
   CLEAR_CURRENT,
+  // SET_CHECK,
 } from '../Types';
 
 export default (state, action) => {
@@ -20,6 +21,7 @@ export default (state, action) => {
         ...state,
         todos: [...state.todos, action.payload],
       };
+
     case UPDATE_TODO:
       return {
         ...state,
@@ -27,21 +29,29 @@ export default (state, action) => {
           todo.id === action.payload.id ? action.payload : todo,
         ),
       };
+
     case DELETE_TODO:
       return {
         ...state,
         todos: state.todos.filter(todo => todo.id !== action.payload),
       };
+
     case SET_CURRENT:
       return {
         ...state,
         current: action.payload,
       };
+
     case CLEAR_CURRENT:
       return {
         ...state,
         current: null,
       };
+    // case SET_CHECK:
+    //   return {
+    //     ...state,
+    //     check: true,
+    //   };
 
     default:
       return state;
