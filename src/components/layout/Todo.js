@@ -20,11 +20,10 @@ const Todo = ({ todo }) => {
     setToggleAction(prev => !prev);
   };
 
-  if (loading) {
-    return <Spinner />;
-  } else {
+
     return (
       <Fragment>
+        {loading && Spinner}
         <div>
           <div className="todo_items-area">
             <div>
@@ -67,7 +66,6 @@ const Todo = ({ todo }) => {
         </div>
       </Fragment>
     );
-  }
 };
 
 Todo.propTypes = {
