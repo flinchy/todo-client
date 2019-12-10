@@ -28,7 +28,7 @@ const TodoState = props => {
     //set loading here
 
     try {
-      const res = await axios.get(`http://localhost:8080/api/v1/tasks`);
+      const res = await axios.get(`https://todo-chisom.herokuapp.com/api/v1/tasks`);
 
       dispatch({
         type: GET_TODOS,
@@ -44,7 +44,7 @@ const TodoState = props => {
     //set Loading
     try {
       const res = await axios.post(
-        `http://localhost:8080/api/v1/tasks`,
+        `https://todo-chisom.herokuapp.com/api/v1/tasks`,
         payload,
         SupportHeader({ 'Content-Type': 'application/json' }),
       );
@@ -63,7 +63,7 @@ const TodoState = props => {
     //set loading
     try {
       const res = await axios.put(
-        `http://localhost:8080/api/v1/tasks/${id}`,
+        `https://todo-chisom.herokuapp.com/api/v1/tasks/${id}`,
         payload,
         SupportHeader({ 'Content-Type': 'application/json' }),
       );
@@ -81,7 +81,7 @@ const TodoState = props => {
   const deleteTodo = async id => {
     try {
       const res = await axios.delete(
-        `http://localhost:8080/api/v1/tasks/${id}`,
+        `https://todo-chisom.herokuapp.com/api/v1/tasks/${id}`,
         id,
         SupportHeader({ 'Content-Type': 'application/json' }),
       );
