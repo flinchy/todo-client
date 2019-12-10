@@ -18,7 +18,7 @@ const Home = () => {
       <AddTask />
       <TransitionGroup>
         {todos.map(todo => (
-          <CSSTransition key={todo.id} timeout={2000}>
+          <CSSTransition key={todo.id} timeout={500}>
             <Todo todo={todo} />
           </CSSTransition>
         ))}
