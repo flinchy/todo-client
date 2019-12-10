@@ -1,42 +1,61 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import TodoContext from '../../context/todo/todoContext';
 import AlertContext from '../../context/alert/alertContext';
 
 const AddTask = () => {
   const todoContext = useContext(TodoContext);
+  const { createTodo, updateTodo, current, clearCurrent } = todoContext;
+
   const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
+
+  useEffect(() => {
+    if (current !== null) {
+      setTodo(current);
+    } else {
+      setTodo({
+        title: '',
+        description: '',
+        status: '',
+      });
+    }
+  }, [todoContext, current]);
 
   const [todo, setTodo] = useState({
     title: '',
     description: '',
     status: '',
   });
-  const {title, description, status} = todo;
-
+  const { title, description, status } = todo;
 
   const onSubmit = e => {
     e.preventDefault();
     if (title === '' || description === '' || status === '') {
-      alertContext.setAlert('Please fill in all fields', 'dark');
+      setAlert('Please fill in all fields', 'dark');
+
+    }else if (current === null) {
+      createTodo(todo);
+      setAlert('Todo added successfully', 'success')
     } else {
-      todoContext.createTodo(todo);
-      setTodo({
-        title: '',
-        description: '',
-        status: ''
-      })
+      setAlert('Todo updated successfully', 'success')
+      updateTodo(todo.id, todo);
     }
+    clearAll();
+  };
+
+  const clearAll = () => {
+    clearCurrent();
   };
 
   const onChange = e => {
-    e.preventDefault()
-    setTodo({...todo,[e.target.name]: e.target.value});
+    e.preventDefault();
+    setTodo({ ...todo, [e.target.name]: e.target.value });
   };
 
   return (
     <div>
       <form className="form" onSubmit={onSubmit}>
-      <input
+        <input
           type="text"
           name="title"
           value={todo.title}
@@ -53,7 +72,7 @@ const AddTask = () => {
           className="bg-dark todo_input"
           onChange={onChange}
         />
-         <input
+        <input
           type="text"
           name="status"
           value={todo.status}
@@ -63,11 +82,18 @@ const AddTask = () => {
         />
         <input
           type="submit"
-          value="AddTodo"
-          className="btn btn-light btn-dark btn-xm"
+          value={current === null ? 'Add' : 'Update'}
+          className="btn btn-success btn-xm"
+          style={{ fontSize: '13px', color: '#ccc' }}
         />
-        <span>
-        </span>
+        {current && (
+          <input
+            type="submit"
+            value="cancel"
+            className="btn btn-secondary btn-xm"
+            style={{ fontSize: '13px' }}
+          onClick={clearAll}/>
+        )}
       </form>
     </div>
   );

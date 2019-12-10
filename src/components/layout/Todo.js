@@ -7,7 +7,12 @@ const Todo = ({ todo }) => {
   const [toggleAction, setToggleAction] = useState(false);
   const todoContext = useContext(TodoContext);
 
-  const {setCurrent} = todoContext
+  const { setCurrent, deleteTodo, clearCurrent } = todoContext;
+
+  const onDelete = () => {
+    deleteTodo(todo.id);
+    clearCurrent();
+  };
 
   const onClick = () => {
     setToggleAction(prev => !prev);
@@ -18,8 +23,10 @@ const Todo = ({ todo }) => {
       <div>
         <div className="todo_items-area">
           <div>
-            <input type="checkbox" id={todo.id}/>
-            {" "}<label htmlFor={todo.id} style={{fontSize: '13px'}}>{todo.description}</label>
+            <input type="checkbox" id={todo.id} />{' '}
+            <label htmlFor={todo.id} style={{ fontSize: '13px' }}>
+              {todo.description}
+            </label>
           </div>
           <i className="fas fa-ellipsis-h" onClick={onClick}></i>
         </div>
@@ -27,12 +34,20 @@ const Todo = ({ todo }) => {
         {toggleAction && (
           <div className="cta-task">
             <span>
-              <button className="btn btn-secondary btn-xm" title="edit" onClick={() => setCurrent(todo)}>
+              <button
+                className="btn btn-secondary btn-xm"
+                title="edit"
+                onClick={() => setCurrent(todo)}
+              >
                 Edit
               </button>
             </span>{' '}
             <span>
-              <button className="btn btn-primary btn-xm" title="delete">
+              <button
+                className="btn btn-primary btn-xm"
+                title="delete"
+                onClick={onDelete}
+              >
                 Delete
               </button>
             </span>
@@ -45,6 +60,6 @@ const Todo = ({ todo }) => {
 
 Todo.propTypes = {
   todo: PropTypes.object.isRequired,
-}
+};
 
 export default Todo;
