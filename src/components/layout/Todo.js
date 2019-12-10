@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useContext } from 'react';
 import TodoContext from '../../context/todo/todoContext';
 import PropTypes from 'prop-types';
+import convertDate from '../../utils/Date';
 // import menuIcon from '../icons/icon-menu.png';
 
 const Todo = ({ todo }) => {
@@ -18,6 +19,7 @@ const Todo = ({ todo }) => {
     setToggleAction(prev => !prev);
   };
 
+
   return (
     <Fragment>
       <div>
@@ -27,6 +29,7 @@ const Todo = ({ todo }) => {
             <label htmlFor={todo.id} style={{ fontSize: '13px' }}>
               {todo.description}
             </label>
+  <div className="todo-title">{`${todo.title[0].toUpperCase()}${todo.title.substr(1)}`} <span>{convertDate(todo.createdAt)}</span></div>
           </div>
           <i className="fas fa-ellipsis-h" onClick={onClick}></i>
         </div>

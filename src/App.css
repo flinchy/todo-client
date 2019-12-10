@@ -478,3 +478,9 @@ input[type=checkbox] + label:active:before {
   transform: scale(0);
 }
 
+.todo-title {
+  transform: translate(18%, -60%);
+  font-size: 9px;
+  font-weight: 600;
+  color: #ccc;
+}
