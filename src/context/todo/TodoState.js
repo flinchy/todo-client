@@ -7,6 +7,7 @@ import {
   GET_TODOS,
   CREATE_TODO,
   UPDATE_TODO,
+  DELETE_TODO,
   SET_CURRENT,
   CLEAR_CURRENT,
 } from '../Types';
@@ -69,7 +70,24 @@ const TodoState = props => {
         type: UPDATE_TODO,
         payload: res.data.data,
       });
+    } catch (error) {
+      console.error({ error });
+    }
+  };
 
+  //*Delete Todo
+  const deleteTodo = async id => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:8080/api/v1/tasks/${id}`,
+        id,
+        SupportHeader({ 'Content-Type': 'application/json' }),
+      );
+      console.log(res);
+      dispatch({
+        type: DELETE_TODO,
+        payload: id,
+      });
     } catch (error) {
       console.error({ error });
     }
@@ -77,13 +95,13 @@ const TodoState = props => {
 
   //*Set Current Todo
   const setCurrent = todo => {
-    dispatch({type: SET_CURRENT, payload: todo})
-  }
+    dispatch({ type: SET_CURRENT, payload: todo });
+  };
 
   //*Clear Current Todo
   const clearCurrent = () => {
-    dispatch({type: CLEAR_CURRENT})
-  }
+    dispatch({ type: CLEAR_CURRENT });
+  };
 
   return (
     <TodoContext.Provider
@@ -93,8 +111,9 @@ const TodoState = props => {
         getAllTodos,
         createTodo,
         updateTodo,
+        deleteTodo,
         setCurrent,
-        clearCurrent
+        clearCurrent,
       }}
     >
       {props.children}
