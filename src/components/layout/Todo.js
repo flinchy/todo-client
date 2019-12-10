@@ -21,11 +21,10 @@ const Todo = ({ todo }) => {
   };
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   } else {
     return (
       <Fragment>
-
         <div>
           <div className="todo_items-area">
             <div>
@@ -35,7 +34,9 @@ const Todo = ({ todo }) => {
               </label>
               <div className="todo-title">
                 {`${todo.title[0].toUpperCase()}${todo.title.substr(1)}`}{' '}
-                <span className="time">{`created on ${convertDate(todo.createdAt)}`}</span>
+                <span className="time">{`created on ${convertDate(
+                  todo.createdAt,
+                )}`}</span>
               </div>
             </div>
             <i className="fas fa-ellipsis-h" onClick={onClick}></i>
@@ -67,8 +68,6 @@ const Todo = ({ todo }) => {
       </Fragment>
     );
   }
-
-
 };
 
 Todo.propTypes = {
