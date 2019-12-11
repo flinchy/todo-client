@@ -35,7 +35,10 @@ const Todo = ({ todo }) => {
                 )}`}</span>
               </div>
             </div>
+            <div className="todo-icon">
             <i className="fas fa-ellipsis-h" onClick={onClick}></i>
+            </div>
+
           </div>
 
           {toggleAction && (

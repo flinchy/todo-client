@@ -486,6 +486,10 @@ input[type=checkbox] + label:active:before {
   color: var(--primary-color);
 }
 
+.todo-icon {
+  display: inline-block;
+}
+
 .time {
   color: #ccc;
 }
