@@ -443,7 +443,7 @@ table th {
 }
 
 input[type=checkbox] + label {
-  display: block;
+  display: inline-block;
   margin: 0.2em;
   cursor: pointer;
   padding: 0.2em;

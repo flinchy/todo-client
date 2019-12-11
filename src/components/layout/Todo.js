@@ -2,8 +2,6 @@ import React, { Fragment, useState, useContext } from 'react';
 import TodoContext from '../../context/todo/todoContext';
 import PropTypes from 'prop-types';
 import convertDate from '../../utils/Date';
-// import Spinner from '../layout/Spinner';
-// import menuIcon from '../icons/icon-menu.png';
 
 const Todo = ({ todo }) => {
   const [toggleAction, setToggleAction] = useState(false);
@@ -23,12 +21,11 @@ const Todo = ({ todo }) => {
 
     return (
       <Fragment>
-        {/* {loading && <Spinner />} */}
         <div>
           <div className="todo_items-area">
             <div>
               <input type="checkbox" id={todo.id} />{' '}
-              <label style={{ fontSize: '13px' }}>
+              <label htmlFor={todo.id} style={{ fontSize: '13px' }}>
                 {todo.description}
               </label>
               <div className="todo-title">

@@ -27,7 +27,7 @@ const TodoState = props => {
   //*Get Todos
   const getAllTodos = async () => {
     //set loading here
-    // setLoading();
+    setLoading();
 
     try {
       const res = await axios.get(
