@@ -28,7 +28,7 @@ const Todo = ({ todo }) => {
           <div className="todo_items-area">
             <div>
               <input type="checkbox" id={todo.id} />{' '}
-              <label htmlFor={todo.id} style={{ fontSize: '13px' }}>
+              <label style={{ fontSize: '13px' }}>
                 {todo.description}
               </label>
               <div className="todo-title">
