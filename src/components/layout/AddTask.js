@@ -73,12 +73,13 @@ const AddTask = () => {
           onChange={onChange}
         />
         <input
-          type="text"
+          type="hidden"
           name="status"
-          value={todo.status}
+          value="pending"
           placeholder="status.."
           className="bg-dark todo_input"
           onChange={onChange}
+          disabled
         />
         <input
           type="submit"
