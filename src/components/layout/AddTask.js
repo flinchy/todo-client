@@ -78,7 +78,6 @@ const AddTask = () => {
           value="pending"
           placeholder="status.."
           className="bg-dark todo_input"
-          onChange={onChange}
           disabled
         />
         <input
