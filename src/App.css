@@ -488,3 +488,17 @@ input[type=checkbox] + label:active:before {
 .time {
   color: #ccc;
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .container {
+    max-width: 100%;
+    padding: 0 .1rem;
+  }
+  .card {
+    padding: .2rem;
+  }
+  .todo_content {
+    width: 95%;
+  }
+}
