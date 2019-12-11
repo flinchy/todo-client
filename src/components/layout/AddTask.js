@@ -72,7 +72,7 @@ const AddTask = () => {
           onChange={onChange}
         />
         <input
-          type="text"
+          type="hidden"
           name="status"
           value={`pending`}
           placeholder="status.."
