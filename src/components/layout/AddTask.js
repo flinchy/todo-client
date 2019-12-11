@@ -26,11 +26,11 @@ const AddTask = () => {
     description: '',
     status: '',
   });
-  const { title, description, status } = todo;
+  const { title, description } = todo;
 
   const onSubmit = e => {
     e.preventDefault();
-    if (title === '' || description === '' || status === '') {
+    if (title === '' || description === '') {
       setAlert('Please fill in all fields', 'dark');
 
     }else if (current === null) {
