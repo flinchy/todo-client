@@ -16,7 +16,7 @@ const AddTask = () => {
       setTodo({
         title: '',
         description: '',
-        status: '',
+
       });
     }
   }, [todoContext, current]);
@@ -24,7 +24,6 @@ const AddTask = () => {
   const [todo, setTodo] = useState({
     title: '',
     description: '',
-    status: '',
   });
   const { title, description } = todo;
 
@@ -75,7 +74,7 @@ const AddTask = () => {
         <input
           type="text"
           name="status"
-          value="pending"
+          value={`pending`}
           placeholder="status.."
           className="bg-dark todo_input"
           disabled
