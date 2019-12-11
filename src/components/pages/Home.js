@@ -3,10 +3,11 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import AddTask from '../layout/AddTask';
 import Todo from '../layout/Todo';
 import TodoContext from '../../context/todo/todoContext';
+import Spinner from '../layout/Spinner';
 
 const Home = () => {
   const todoContext = useContext(TodoContext);
-  const { todos } = todoContext;
+  const { todos, loading } = todoContext;
 
   useEffect(() => {
     todoContext.getAllTodos();
@@ -15,6 +16,7 @@ const Home = () => {
 
   return (
     <Fragment>
+      {loading && <Spinner />}
       <AddTask />
       <TransitionGroup>
         {todos.map(todo => (
