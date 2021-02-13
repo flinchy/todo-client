@@ -443,7 +443,7 @@ table th {
 }
 
 input[type=checkbox] + label {
-  display: block;
+  display: inline-block;
   margin: 0.2em;
   cursor: pointer;
   padding: 0.2em;
@@ -480,11 +480,30 @@ input[type=checkbox] + label:active:before {
 
 .todo-title {
   margin-left: 3em;
+  display: inline-block;
   font-size: 9px;
   font-weight: 600;
   color: var(--primary-color);
 }
 
+.todo-icon {
+  display: inline-block;
+}
+
 .time {
   color: #ccc;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .container {
+    max-width: 100%;
+    padding: 0 .1rem;
+  }
+  .card {
+    padding: .2rem;
+  }
+  .todo_content {
+    width: 95%;
+  }
 }

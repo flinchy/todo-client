@@ -2,8 +2,6 @@ import React, { Fragment, useState, useContext } from 'react';
 import TodoContext from '../../context/todo/todoContext';
 import PropTypes from 'prop-types';
 import convertDate from '../../utils/Date';
-// import Spinner from '../layout/Spinner';
-// import menuIcon from '../icons/icon-menu.png';
 
 const Todo = ({ todo }) => {
   const [toggleAction, setToggleAction] = useState(false);
@@ -23,7 +21,6 @@ const Todo = ({ todo }) => {
 
     return (
       <Fragment>
-        {/* {loading && <Spinner />} */}
         <div>
           <div className="todo_items-area">
             <div>
@@ -38,7 +35,10 @@ const Todo = ({ todo }) => {
                 )}`}</span>
               </div>
             </div>
+            <div className="todo-icon">
             <i className="fas fa-ellipsis-h" onClick={onClick}></i>
+            </div>
+
           </div>
 
           {toggleAction && (
